@@ -11,7 +11,7 @@ db = Database()
 
 class Scale(db.Entity):
     id = PrimaryKey(int, auto=True)
-    name = Required(str)
+    name = Required(str) # common acronym
     items = Set('Item')
     subscales = Set('Subscale')
     full_name = Optional(str)
@@ -21,7 +21,7 @@ class Item(db.Entity):
     id = PrimaryKey(int, auto=True)
     scale = Required(Scale)
     subscale = Optional('Subscale')
-    text = Required(str)
+    text = Required(str) # question / text associated with item
     reverse_score = Required(bool, default=False)
     response_options = Set('ResponseOption')
 
@@ -33,7 +33,7 @@ class Subscale(db.Entity):
     items = Set(Item)
 
 
-class ResponseOption(db.Entity):
+class ResponseOption(db.Entity): # ResponseOption exists where response is not a numeric value
     id = PrimaryKey(int, auto=True)
     value = Required(int)
     item = Required(Item)

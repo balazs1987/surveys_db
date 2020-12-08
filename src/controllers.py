@@ -11,9 +11,6 @@ import os
 src_dir = os.path.dirname(os.path.abspath(__file__))
 base_dir   = os.path.abspath(os.path.join(src_dir, os.pardir))
 
-def hello():
-    print('hello')
-
 def open_db(filepath=os.path.join(base_dir, 'surveys.sqlite')):
     """ Open existing database """
 
@@ -21,17 +18,16 @@ def open_db(filepath=os.path.join(base_dir, 'surveys.sqlite')):
     db.generate_mapping(create_tables=True)
     return db
 
-#@db_session
 def build_db(filepath=os.path.join(base_dir, 'surveys.sqlite')):
     """ Create databse form scratch """
 
-    if os.path.isfile(filepath): # remove db if already exists
-        os.remove(filepath)
+    #if os.path.isfile(filepath):
+    #    os.remove(filepath)
 
     db.bind(provider='sqlite', filename=filepath, create_db=True)
     db.generate_mapping(create_tables=True)
 
-    sss = Scale(name='SSS', full_name='Short suggestibility scale')
+    sss = Scale(name='SSS', full_name='short suggestibility scale')
     Item(scale=sss, text="I am easily influenced by other people’s opinions.")
     Item(scale=sss, text="I get a lot of good practical advice from magazines or TV.")
     Item(scale=sss, text="When someone coughs or sneezes, I usually feel the urge to do the same.")
